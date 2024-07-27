@@ -1,0 +1,12 @@
+node_modules
+dist
+.env
+
+# Editor directories and files
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
