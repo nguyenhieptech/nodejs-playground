@@ -1,5 +1,8 @@
-import fs from "node:fs"; // https://nodejs.org/docs/latest/api/fs.html#file-system
-import zlib from "node:zlib"; // https://nodejs.org/docs/latest/api/zlib.html
+import fs from "node:fs";
+import zlib from "node:zlib";
+
+// https://nodejs.org/docs/latest/api/fs.html#file-system
+// https://nodejs.org/docs/latest/api/zlib.html
 
 const gzip = zlib.createGzip();
 
@@ -10,4 +13,4 @@ const readableStream = fs.createReadStream("./stream-file.txt", {
 
 const writableStream = fs.createWriteStream("./stream-file2.txt");
 
-readableStream.pipe(writableStream);
+readableStream.pipe(gzip).pipe(writableStream);

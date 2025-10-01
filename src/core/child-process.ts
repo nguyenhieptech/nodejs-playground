@@ -1,6 +1,6 @@
-// https://nodejs.org/docs/latest/api/child_process.html
-
 import { spawn } from "node:child_process";
+
+// https://nodejs.org/docs/latest/api/child_process.html
 
 const ls = spawn("ls", ["-lh", "/usr"]);
 

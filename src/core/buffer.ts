@@ -1,6 +1,6 @@
-// https://nodejs.org/docs/latest/api/buffer.html
-
 import { Buffer } from "node:buffer";
+
+// https://nodejs.org/docs/latest/api/buffer.html
 
 const buff = Buffer.alloc(8);
 

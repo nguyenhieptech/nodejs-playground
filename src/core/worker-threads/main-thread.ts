@@ -1,8 +1,8 @@
-// https://github.com/gopinav/Nodejs-Tutorials/blob/master/node-fundamentals/main-thread.js
-// https://nodejs.org/docs/latest/api/worker_threads.html
-
 import http from "node:http";
 import { Worker } from "node:worker_threads";
+
+// https://github.com/gopinav/Nodejs-Tutorials/blob/master/node-fundamentals/main-thread.js
+// https://nodejs.org/docs/latest/api/worker_threads.html
 
 const server = http.createServer((req, res) => {
   if (req.url === "/") {

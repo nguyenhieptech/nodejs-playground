@@ -1,3 +1,9 @@
+import fs from "node:fs";
+import url from "node:url";
+
+// https://www.kindacode.com/article/node-js-using-__dirname-and-__filename-with-es-modules/
+const __filename = url.fileURLToPath(import.meta.url);
+
 // Node.js Tutorials - 43 - Microtask Queues - https://youtu.be/M3sbOSJvhxg
 // There are 6 queues in the diagram:
 // - Microtask queue (includes nextTick queue and promise queue)
@@ -6,18 +12,10 @@
 // - Check queue
 // - Close queue
 // https://github.com/gopinav/Nodejs-Tutorials/blob/master/node-fundamentals/event-loop.js
-
 // The order of execution you're observing is due to the differences in the event loop behavior between CommonJS (CJS) modules and ES Modules (ESM).
 // In ES Modules (ESM), the microtask queue (Promise.resolve().then()) runs before the process.nextTick() queue.
 // This is different from the behavior in CommonJS (CJS), where process.nextTick() runs before microtasks.
 // Therefore, when running the code with ESM, the order you provided is the correct order of output:
-
-import fs from "node:fs";
-
-// https://www.kindacode.com/article/node-js-using-__dirname-and-__filename-with-es-modules/
-import { fileURLToPath } from "node:url";
-
-const __filename = fileURLToPath(import.meta.url);
 
 // ChatGPT Explanation
 // Yes, that's correct. The order of execution can indeed vary between CommonJS (CJS) modules and ES Modules (ESM) due to

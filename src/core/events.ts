@@ -1,6 +1,6 @@
-// https://nodejs.org/docs/latest/api/events.html
-
 import { EventEmitter } from "node:events";
+
+// https://nodejs.org/docs/latest/api/events.html
 
 // Ideally, we could have an object or some kind of data structures to store our events names for type-safety.
 // The naming convention could be decided by the team.

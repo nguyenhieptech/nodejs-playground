@@ -1,6 +1,6 @@
-// https://nodejs.org/docs/latest/api/dns.html#dns
-
 import dns from "node:dns";
+
+// https://nodejs.org/docs/latest/api/dns.html#dns
 
 dns.resolve4("archive.org", (err, addresses) => {
   if (err) throw err;

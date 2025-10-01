@@ -1,12 +1,12 @@
-// Node.js Tutorial - 61 - Cluster Module
-// https://youtu.be/SHR-KmfRIsU?si=ZnkJ-dDywAarfqHc
-// https://github.com/gopinav/Nodejs-Tutorials/blob/master/node-fundamentals/cluster.js
-// https://nodejs.org/docs/latest/api/cluster.html
-
 import cluster from "node:cluster";
 import http from "node:http";
 import os from "node:os";
 import process from "node:process";
+
+// Node.js Tutorial - 61 - Cluster Module
+// https://youtu.be/SHR-KmfRIsU?si=ZnkJ-dDywAarfqHc
+// https://github.com/gopinav/Nodejs-Tutorials/blob/master/node-fundamentals/cluster.js
+// https://nodejs.org/docs/latest/api/cluster.html
 
 const PORT = 8000;
 

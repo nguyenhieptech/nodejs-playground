@@ -1,6 +1,6 @@
-// https://nodejs.org/docs/latest/api/util.html#utilcallbackifyoriginal
-
 import util from "node:util";
+
+// https://nodejs.org/docs/latest/api/util.html#utilcallbackifyoriginal
 
 async function fn(): Promise<string> {
   return "hello world";

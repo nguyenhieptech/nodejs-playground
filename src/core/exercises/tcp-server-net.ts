@@ -1,12 +1,11 @@
-import { createServer } from "node:net";
+import net from "node:net";
 
 const PORT = 4000;
 const HOST = "127.0.0.1";
 
 // Create a TCP server
-const server = createServer((socket) => {
+const server = net.createServer((socket) => {
   console.log("Client connected:", socket.remoteAddress, socket.remotePort);
-
   // Event listener for incoming data from the client
   socket.on("data", (data) => {
     console.log("Received from client:", data.toString());
