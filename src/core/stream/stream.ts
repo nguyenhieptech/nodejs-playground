@@ -1,11 +1,23 @@
+import fs from "node:fs";
+import http from "node:http";
+import zlib from "node:zlib";
+
 // https://nodejs.org/docs/latest/api/stream.html#api-for-stream-consumers
+// https://www.w3schools.com/nodejs/nodejs_streams.asp
 
 // Almost all Node.js applications, no matter how simple, use streams in some manner.
 // The following is an example of using streams in a Node.js application that implements an HTTP server
+// $ curl localhost:1337 -d "{}"
+// object
+// $ curl localhost:1337 -d "\"foo\""
+// string
+// $ curl localhost:1337 -d "not json"
+// error: Unexpected token 'o', "not json" is not valid JSON
+// HTTP responses on the client, HTTP requests on the server are readable streams.
+// HTTP requests on the client, HTTP responses on the server are writable streams.
+// https://github.com/gopinav/Nodejs-Tutorials/blob/master/node-fundamentals/streams.js
 
-import { createServer } from "node:http";
-
-const server = createServer((req, res) => {
+const server = http.createServer((req, res) => {
   // `req` is an http.IncomingMessage, which is a readable stream.
   // `res` is an http.ServerResponse, which is a writable stream.
 
@@ -36,38 +48,24 @@ const server = createServer((req, res) => {
 
 server.listen(1337);
 
-// $ curl localhost:1337 -d "{}"
-// object
-// $ curl localhost:1337 -d "\"foo\""
-// string
-// $ curl localhost:1337 -d "not json"
-// error: Unexpected token 'o', "not json" is not valid JSON
-
-// HTTP requests are readable streams.
-// HTTP responses are writable streams.
-
-// https://github.com/gopinav/Nodejs-Tutorials/blob/master/node-fundamentals/streams.js
-import { createReadStream, createWriteStream } from "node:fs";
-import { createGzip } from "node:zlib";
-
-const readableStream = createReadStream("./stream-file.txt", {
+const readableStream = fs.createReadStream("./stream-file.txt", {
   encoding: "utf8",
   // highWaterMark determines the size of the internal buffer used by the stream
   // option controls the size of these chunks.
   highWaterMark: 64,
 });
 
-const writeableStream = createWriteStream("./stream-file2.txt");
+const writeableStream = fs.createWriteStream("./stream-file2.txt");
 
-// readableStream.on("data", (chunk) => {
-//   console.log(chunk);
-//   writeableStream.write(chunk);
-// });
+readableStream.on("data", (chunk) => {
+  console.log(chunk);
+  writeableStream.write(chunk);
+});
 
 readableStream.pipe(writeableStream);
 
-const gzip = createGzip();
-readableStream.pipe(gzip).pipe(createWriteStream("./file2.txt.gz"));
+const gzip = zlib.createGzip();
+readableStream.pipe(gzip).pipe(fs.createWriteStream("./file2.txt.gz"));
 
 readableStream.on("end", () => {
   console.log("Done reading");

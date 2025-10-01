@@ -1,9 +1,9 @@
-import { createReadStream, createWriteStream } from "node:fs";
-import { pipeline } from "node:stream";
-import { promisify } from "node:util";
-import { createGunzip, createGzip } from "node:zlib";
+import fs from "node:fs";
+import stream from "node:stream";
+import util from "node:util";
+import zlib from "node:zlib";
 
-const pipe = promisify(pipeline);
+const pipe = util.promisify(stream.pipeline);
 
 /**
  * Compresses a file using gzip.
@@ -11,9 +11,9 @@ const pipe = promisify(pipeline);
  * @param outputFile - The path where the compressed file will be saved.
  */
 async function compressFile(inputFile: string, outputFile: string): Promise<void> {
-  const gzip = createGzip();
-  const source = createReadStream(inputFile);
-  const destination = createWriteStream(outputFile);
+  const gzip = zlib.createGzip();
+  const source = fs.createReadStream(inputFile);
+  const destination = fs.createWriteStream(outputFile);
 
   try {
     await pipe(source, gzip, destination);
@@ -29,9 +29,9 @@ async function compressFile(inputFile: string, outputFile: string): Promise<void
  * @param outputFile - The path where the decompressed file will be saved.
  */
 async function decompressFile(inputFile: string, outputFile: string): Promise<void> {
-  const gunzip = createGunzip();
-  const source = createReadStream(inputFile);
-  const destination = createWriteStream(outputFile);
+  const gunzip = zlib.createGunzip();
+  const source = fs.createReadStream(inputFile);
+  const destination = fs.createWriteStream(outputFile);
 
   try {
     await pipe(source, gunzip, destination);

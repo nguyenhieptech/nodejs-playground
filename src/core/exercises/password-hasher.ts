@@ -1,4 +1,4 @@
-import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import crypto from "node:crypto";
 
 /**
  * Hashes a plain-text password.
@@ -6,8 +6,8 @@ import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
  * @returns The hashed password, combined with the salt, as a hex string.
  */
 function hashPassword(password: string): string {
-  const salt = randomBytes(16).toString("hex"); // Generate a random salt
-  const hashedPassword = scryptSync(password, salt, 64).toString("hex"); // Hash the password
+  const salt = crypto.randomBytes(16).toString("hex"); // Generate a random salt
+  const hashedPassword = crypto.scryptSync(password, salt, 64).toString("hex"); // Hash the password
   return `${salt}:${hashedPassword}`; // Return salt and hash as a single string
 }
 
@@ -20,10 +20,10 @@ function hashPassword(password: string): string {
 function verifyPassword(password: string, storedHash: string): boolean {
   const [salt, hashedPassword] = storedHash.split(":"); // Extract salt and hashed password
   const hashedBuffer = Buffer.from(String(hashedPassword), "hex");
-  const inputHashBuffer = scryptSync(password, String(salt), 64);
+  const inputHashBuffer = crypto.scryptSync(password, String(salt), 64);
 
   // Use timingSafeEqual to prevent timing attacks
-  return timingSafeEqual(hashedBuffer, inputHashBuffer);
+  return crypto.timingSafeEqual(hashedBuffer, inputHashBuffer);
 }
 
 // Example usage
