@@ -4,14 +4,41 @@ Repo for learning NodeJS core concepts.
 
 NodeJS, TypeScript and ESBuild.
 
-Setup: https://www.totaltypescript.com/build-a-node-app-with-typescript-and-esbuild
-
-Run project locally
+## Run locally
 
 ```bash
-bun install
-# or npm, yarn, pnpm, whatever
+pnpm install # or npm, yarn, bun, whatever
 
-# Copy example code from `src/core` to `src/index.ts` and run bun dev
-bun dev
+# Copy examples from `src/core` to `src/index.ts`, and then run
+pnpm dev
 ```
+
+## Run with Docker
+
+### Building and running your application
+
+When you're ready, start your application by running:
+
+```bash
+docker compose up --build
+```
+
+Your application will be available at http://localhost:4040.
+
+### Deploying your application to the cloud
+
+First, build your image, e.g.: `docker build -t myapp .`.
+If your cloud uses a different CPU architecture than your development
+machine (e.g., you are on a Mac M1 and your cloud provider is amd64),
+you'll want to build the image for that platform, e.g.:
+`docker build --platform=linux/amd64 -t myapp .`.
+
+Then, push it to your registry, e.g. `docker push myregistry.com/myapp`.
+
+Consult Docker's [getting started](https://docs.docker.com/go/get-started-sharing/)
+docs for more detail on building and pushing.
+
+## References
+
+- [Build a Node App With TypeScript & ESBuild](https://www.totaltypescript.com/build-a-node-app-with-typescript-and-esbuild)
+- [Docker's Node.js guide](https://docs.docker.com/guides/nodejs/)
